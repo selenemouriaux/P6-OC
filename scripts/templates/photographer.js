@@ -38,5 +38,38 @@ function photographerTemplate(data) {
 
     return link;
   }
-  return { getUserCardDOM };
+
+  function getUserHeaderDOM() {
+    const article = document.createElement("article");
+
+    const imgBox = document.createElement("div");
+    imgBox.classList.add("imgBox");
+    const img = createAccessibleElement.image({
+      src: `assets/photographers/${portrait}`,
+      alt: `photo du visage de ${name}, photographe`,
+    });
+    imgBox.appendChild(img);
+
+    const h1 = document.createElement("h1");
+    h1.textContent = name;
+    const location = document.createElement("span");
+    location.textContent = `${city}, ${country}`;
+    const slogan = document.createElement("blockquote");
+    slogan.textContent = tagline;
+    const identity = document.createElement("div");
+    identity.classList.add("info");
+    identity.append(h1, location, slogan);
+    const contactMe = document.createElement("button");
+    contactMe.textContent = "Contactez-moi";
+    contactMe.classList.add("contact_button");
+    contactMe.onclick = () => modal.show();
+
+    article.appendChild(identity);
+    article.appendChild(contactMe);
+    article.appendChild(imgBox);
+
+    return article;
+  }
+
+  return { getUserCardDOM, getUserHeaderDOM };
 }

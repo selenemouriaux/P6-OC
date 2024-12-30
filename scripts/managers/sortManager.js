@@ -1,7 +1,7 @@
 // Gestionnaire de tri
 // Gère le tri des médias selon différents critères
 // @param {Array} medias - Liste des médias à trier
-const createSortManager = (medias) => {
+export const createSortManager = (medias) => {
   // Définit les fonctions de tri pour chaque critère
   const sortFunctions = {
     // Tri par nombre de likes (décroissant)

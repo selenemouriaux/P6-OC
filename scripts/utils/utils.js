@@ -1,11 +1,11 @@
-const getUrlParam = (param) => {
+export const getUrlParam = (param) => {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 };
 
-const fetchPhotographerData = async (id) => {
+export const fetchPhotographerData = async (id) => {
   try {
-    const response = await fetch("../data/photographers.json");
+    const response = await fetch("/data/photographers.json");
     const data = await response.json();
 
     return {
@@ -18,7 +18,7 @@ const fetchPhotographerData = async (id) => {
   }
 };
 
-const formatPhotographFilesPath = (name = "") => {
+export const formatPhotographFilesPath = (name = "") => {
   const parts = name.split(" ");
   const cleanedPart = parts[0].replace(/-/g, " ");
   return cleanedPart;

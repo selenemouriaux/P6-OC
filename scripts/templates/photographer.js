@@ -1,5 +1,10 @@
-function photographerTemplate(data) {
+import { initContactForm } from "../utils/contactForm.js";
+import { createAccessibleElement } from "../patterns/accessibleElements.js";
+import { withKeyboardNavigation } from "../patterns/keyboardNavigation.js";
+
+export function photographerTemplate(data) {
   const { name, city, country, tagline, price, portrait } = data;
+  const modal = initContactForm(name);
 
   function getUserCardDOM() {
     const link = createAccessibleElement.link({
@@ -62,11 +67,14 @@ function photographerTemplate(data) {
     const contactMe = document.createElement("button");
     contactMe.textContent = "Contactez-moi";
     contactMe.classList.add("contact_button");
-    contactMe.onclick = () => modal.show();
+    contactMe.onclick = () => modal.showModal();
 
     article.appendChild(identity);
     article.appendChild(contactMe);
     article.appendChild(imgBox);
+
+    // Append modal to DOM
+    document.body.appendChild(modal);
 
     return article;
   }

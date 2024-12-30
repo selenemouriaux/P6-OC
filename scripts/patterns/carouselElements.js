@@ -1,5 +1,7 @@
+import { createAccessibleElement } from "./accessibleElements.js";
+
 // Factory pour créer les éléments du carousel
-const createCarouselElement = {
+export const createCarouselElement = {
   // Crée le conteneur principal du carousel
   container: () => {
     const container = document.createElement("div");

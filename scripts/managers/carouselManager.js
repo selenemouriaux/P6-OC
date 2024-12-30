@@ -1,7 +1,10 @@
+import { createMediaElement } from "../templates/mediaElements.js";
+import { createCarouselElement } from "../patterns/carouselElements.js";
+
 // Gestionnaire du carousel
 // Gère l'état et les comportements du carousel
 // @param {Array} medias - Liste des médias à afficher dans le carousel
-const createCarouselManager = (medias) => {
+export const createCarouselManager = (medias) => {
   // État interne : index du média actuellement affiché
   let currentIndex = 0;
 

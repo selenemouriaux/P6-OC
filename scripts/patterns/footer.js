@@ -1,4 +1,4 @@
-function createFooter({ initialLikes, dailyRate }) {
+export function createFooter({ initialLikes, dailyRate }) {
   let likes = initialLikes;
   let footerElement;
   let likesText;

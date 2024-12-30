@@ -1,4 +1,4 @@
-const createAccessibleElement = {
+export const createAccessibleElement = {
   button: ({ label, onClick, ariaLabel }) => {
     const button = document.createElement("button");
     button.textContent = label;
@@ -42,24 +42,33 @@ const createAccessibleElement = {
     const form = document.createElement("form");
     form.method = "dialog"; // Allows closing with ESC or cancel
     fields.forEach(({ label, type, name }) => {
+      const fieldDiv = document.createElement("div");
+
       const labelElement = document.createElement("label");
       labelElement.textContent = label;
       labelElement.htmlFor = name;
 
-      const input = document.createElement("input");
-      input.type = type;
+      const input =
+        type === "text" && name === "message"
+          ? document.createElement("textarea")
+          : document.createElement("input");
+
+      if (type !== "text" || name !== "message") {
+        input.type = type;
+      }
       input.name = name;
       input.id = name;
       input.required = true;
 
-      form.appendChild(labelElement);
-      form.appendChild(input);
+      fieldDiv.appendChild(labelElement);
+      fieldDiv.appendChild(input);
+      form.appendChild(fieldDiv);
     });
 
     // Submit Button
     const submitButton = createAccessibleElement.button({
-      label: "Submit",
-      ariaLabel: "Submit form",
+      label: "Envoyer",
+      ariaLabel: "Envoyer le formulaire",
       onClick: (e) => {
         e.preventDefault();
         const formData = new FormData(form);
@@ -68,16 +77,20 @@ const createAccessibleElement = {
         dialog.close();
       },
     });
+    submitButton.classList.add("contact_button");
 
-    form.appendChild(submitButton);
+    const buttonDiv = document.createElement("div");
+    buttonDiv.appendChild(submitButton);
+    form.appendChild(buttonDiv);
     dialog.appendChild(form);
 
     // Close Button
     const closeButton = createAccessibleElement.button({
-      label: "Close",
-      ariaLabel: "Close modal",
+      label: "×",
+      ariaLabel: "Fermer la modale",
       onClick: () => dialog.close(),
     });
+    closeButton.classList.add("close-button");
 
     dialog.appendChild(closeButton);
 

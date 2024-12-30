@@ -1,5 +1,5 @@
 // Factory pour créer les éléments média (images et vidéos)
-const createMediaElement = {
+export const createMediaElement = {
   // Crée une carte média avec image/vidéo, titre et likes
   // @param {Object} media - Données du média
   // @param {Function} onClick - Callback pour l'ouverture du carousel

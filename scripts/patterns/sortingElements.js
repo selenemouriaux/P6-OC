@@ -1,4 +1,4 @@
-const createSortingElement = {
+export const createSortingElement = {
   // Crée un dropdown de tri accessible
   // @param {Function} onSort - Callback appelé quand l'utilisateur change le tri
   dropdown: ({ onSort }) => {

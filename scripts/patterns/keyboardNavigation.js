@@ -1,4 +1,4 @@
-const withKeyboardNavigation = (element) => {
+export const withKeyboardNavigation = (element) => {
   element.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();

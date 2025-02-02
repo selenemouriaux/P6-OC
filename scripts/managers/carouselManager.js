@@ -54,8 +54,15 @@ export const createCarouselManager = (medias) => {
   // Gère la lecture/pause des vidéos
   const toggleVideo = () => {
     const video = document.querySelector(".carousel video");
-    if (video) {
-      video.paused ? video.play() : video.pause();
+    const playButton = document.querySelector(".carousel .play-button");
+    if (video && playButton) {
+      if (video.paused) {
+        video.play();
+        playButton.classList.add("playing");
+      } else {
+        video.pause();
+        playButton.classList.remove("playing");
+      }
     }
   };
 
@@ -73,6 +80,25 @@ export const createCarouselManager = (medias) => {
     const content = carousel.querySelector(".carousel-content");
     content.innerHTML = "";
     content.appendChild(mediaElement);
+
+    // Ajoute les gestionnaires d'événements pour la vidéo
+    if (currentMedia.video) {
+      const video = content.querySelector("video");
+      const playButton = content.querySelector(".play-button");
+
+      if (video && playButton) {
+        // Gestionnaire de clic sur le bouton de lecture
+        playButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleVideo();
+        });
+
+        // Met à jour l'état du bouton quand la vidéo se termine
+        video.addEventListener("ended", () => {
+          playButton.classList.remove("playing");
+        });
+      }
+    }
   };
 
   // Affiche le carousel à partir d'un index donné

@@ -48,11 +48,28 @@ export const createMediaElement = {
     return img;
   },
 
-  // Crée un élément vidéo avec les attributs appropriés
+  // Crée un élément vidéo avec les attributs appropriés et un bouton de lecture
   video: ({ video, title }) => {
+    const container = document.createElement("div");
+    container.classList.add("video-container");
+
     const videoEl = document.createElement("video");
     videoEl.src = video;
     videoEl.setAttribute("aria-label", title); // Label pour l'accessibilité
-    return videoEl;
+
+    // Crée le bouton de lecture
+    const playButton = document.createElement("button");
+    playButton.classList.add("play-button");
+    playButton.setAttribute("aria-label", "Lire la vidéo");
+    playButton.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="white">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    `;
+
+    container.appendChild(videoEl);
+    container.appendChild(playButton);
+
+    return container;
   },
 };
